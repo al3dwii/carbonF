@@ -1,24 +1,13 @@
-// Clerk v5 (≥5.0) + Next 14
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server"; // ← Clerk SDK
+import { NextResponse } from "next/server";
 
-// public pages that should NOT trigger auth
-const isPublicRoute = createRouteMatcher(["/", "/pricing"]);
+export function middleware(req: Request) {
+  const { sessionClaims } = auth();
+  const role = sessionClaims()?.publicMetadata?.role ?? "developer";
+  const res = NextResponse.next();
+  res.headers.set("x-user-role", role);
+  return res;
+}
 
-export default clerkMiddleware(async (auth, req) => {
-  /* 1) Skip our own API proxies ---------------------------------------- */
-  if (req.nextUrl.pathname.startsWith("/api/")) return;
+export const config = { matcher: ["/org/:path*"] };
 
-  /* 2) Allow public pages ---------------------------------------------- */
-  if (isPublicRoute(req)) return;
-
-  /* 3) Protect everything else ---------------------------------------- */
-  const { userId, redirectToSignIn } = await auth(); // <-- callback arg!
-  if (!userId) {
-    return redirectToSignIn({ returnBackUrl: req.url });
-  }
-});
-
-/* Tell Next which paths run through the middleware */
-export const config = {
-  matcher: ["/((?!_next|favicon.ico|_static).*)"],
-};
