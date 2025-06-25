@@ -1,8 +1,9 @@
 "use client";
 
-import { useApi } from "@/lib/hooks";
+import { useApi, useEventSource } from "@/lib/hooks";
 import VirtualTable from "@/components/tables/VirtualTable";
 import { useState } from "react";
+import LiveStreamToggle from "@/components/widgets/LiveStreamToggle";
 
 export default function AlertTable({
   initial,
@@ -12,28 +13,36 @@ export default function AlertTable({
   orgId: string;
 }) {
   const [filter, setFilter] = useState<"all" | "open">("all");
+  const [live, setLive] = useState(false);
   const { data } = useApi<any[]>(
     `/org/${orgId}/alerts?filter=${filter}`,
-    { refresh: 5000 }
+    { refresh: live ? 0 : 5000 }
+  );
+  const stream = useEventSource<any[]>(
+    `/api/org/${orgId}/alerts/stream`,
+    live
   );
 
-  const rows = data ?? initial;
+  const rows = live ? stream : data ?? initial;
 
   return (
     <div>
-      <div className="mb-2">
-        <button
-          className={`mr-2 ${filter === "all" ? "font-semibold" : ""}`}
-          onClick={() => setFilter("all")}
-        >
-          All
-        </button>
-        <button
-          className={filter === "open" ? "font-semibold" : ""}
-          onClick={() => setFilter("open")}
-        >
-          Open
-        </button>
+      <div className="flex justify-between items-center mb-2">
+        <div>
+          <button
+            className={`mr-2 ${filter === "all" ? "font-semibold" : ""}`}
+            onClick={() => setFilter("all")}
+          >
+            All
+          </button>
+          <button
+            className={filter === "open" ? "font-semibold" : ""}
+            onClick={() => setFilter("open")}
+          >
+            Open
+          </button>
+        </div>
+        <LiveStreamToggle enabled={live} onToggle={setLive} />
       </div>
 
       <VirtualTable

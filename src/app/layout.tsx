@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Providers }     from "./providers";
 import Shell from "@/components/Shell";
 import { OrgProvider }   from "@/contexts/OrgContext";
+import { getRole } from "@/lib/role";
 
 const inter = Inter({ subsets:["latin"], variable:"--font-inter" });
 
@@ -15,6 +16,11 @@ export default function RootLayout({ children }: { children:React.ReactNode }){
     <ClerkProvider>
       <html lang="en" className={inter.variable}>
         <body className="bg-gray-50 text-gray-800 antialiased">
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.__ROLE__=${JSON.stringify(getRole())};`,
+            }}
+          />
           <Providers>
             <OrgProvider>
               <Shell>{children}</Shell>

@@ -1,22 +1,21 @@
 "use client";
-import Link             from "next/link";
-import { usePathname, useParams } from "next/navigation";
-import { useUser }      from "@clerk/nextjs";
-import { useFlags }     from "@/lib/useFlags";
-import { NAV_BY_ROLE, Role } from "@/lib/nav";
-import { cn }           from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useFlags } from "@/lib/useFlags"; // your LaunchDarkly hook
+import { getRole } from "@/lib/role";
+import { NAV_BY_ROLE } from "@/lib/nav";
+import { cn } from "@/lib/utils";
+import { useOrg } from "@/contexts/OrgContext";
 
-export function Sidebar() {
-  const pathname       = usePathname();
-  const { orgId }      = useParams() as { orgId: string };
-  const { data: flags} = useFlags(orgId);
-  const { user }       = useUser();
-  if (!user) return null;
+export default function Sidebar() {
+  const { id: orgId } = useOrg();
+  const pathname = usePathname();
+  const role =
+    typeof window === "undefined" ? getRole() : (window as any).__ROLE__ ?? "developer";
+  const flags = useFlags(orgId).data ?? {};
 
-  // default to developer if metadata missing
-  const role: Role = (user.publicMetadata.role as Role) ?? "developer";
-  const items       = NAV_BY_ROLE[role].filter(
-    (i) => !i.flag || flags?.[i.flag]
+  const items = (NAV_BY_ROLE[role] ?? []).filter(
+    (i) => !i.flag || flags[i.flag]
   );
 
   return (
@@ -37,9 +36,7 @@ export function Sidebar() {
           </Link>
         ))}
       </nav>
-      <div className="mt-10 text-xs text-gray-500">
-        {user.primaryEmailAddress?.emailAddress}
-      </div>
+      <div className="mt-10 text-xs text-gray-500">&nbsp;</div>
     </aside>
   );
 }

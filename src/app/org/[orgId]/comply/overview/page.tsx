@@ -1,5 +1,6 @@
 import { request } from "@/lib/client";
 import DownloadDropdown from "@/components/widgets/DownloadDropdown";
+import ReportWizard from "@/components/comply/ReportWizard.client";
 
 export const revalidate = 60;
 
@@ -13,7 +14,7 @@ export default async function ComplyOverview({
     <div className="p-6">
       <div className="flex justify-between mb-6">
         <h1 className="text-2xl">CSRD / ESRS Reports</h1>
-        <button className="border px-3 py-1">Generate new</button>
+        <ReportWizard orgId={orgId} />
       </div>
       <ul>
         {files.map((f) => (
