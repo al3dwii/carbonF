@@ -3,8 +3,9 @@ import { request } from "@/lib/client";
 import { Tabs } from "@/components/ui/Tabs";          // assume you have one
 
 export default async function ProjectPage({
-  params:{orgId,projectId},
-}:{params:{orgId:string;projectId:string}}) {
+  params,
+}: {params:{orgId:string;projectId:string}}) {
+  const { orgId, projectId } = params;
   const summary = await request(`/org/${orgId}/projects/${projectId}/summary`);
   return (
     <div className="p-6">

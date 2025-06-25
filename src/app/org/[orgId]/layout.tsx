@@ -1,22 +1,29 @@
 import Shell from "@/components/Shell";
 import { getServerRole } from "@/lib/getRole.server";
 
-export default function OrgLayout({
+export default async function OrgLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { orgId: string };
 }) {
-  const role = getServerRole();
+  const role = await getServerRole();
+  const { orgId } = params;
 
   return (
     <>
-      {/* expose role to the browser once */}
+      {/* expose data for client components */}
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.__ROLE__=${JSON.stringify(role)};`,
+          __html: `window.__ROLE__=${JSON.stringify(
+            role
+          )}; window.__ORG__=${JSON.stringify(orgId)};`,
         }}
       />
-      <Shell role={role}>{children}</Shell>
+      <Shell role={role} orgId={orgId}>
+        {children}
+      </Shell>
     </>
   );
 }

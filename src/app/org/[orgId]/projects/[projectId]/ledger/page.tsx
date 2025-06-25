@@ -1,4 +1,4 @@
-import VirtualTable from "@/components/tables/VirtualTable";
+import { VirtualTable } from "@/components/tables/VirtualTable";
 import { request } from "@/lib/client";
 import DownloadDropdown from "@/components/widgets/DownloadDropdown";
 import LiveStreamToggle from "@/components/widgets/LiveStreamToggle";
@@ -7,10 +7,11 @@ import { useApi } from "@/lib/hooks";
 export const revalidate = 10;
 
 export default async function ProjectLedger({
-  params: { orgId, projectId },
+  params,
 }: {
   params: { orgId: string; projectId: string };
 }) {
+  const { orgId, projectId } = params;
   /* server fetch for first paint */
   const initial = await request<any[]>(
     `/org/${orgId}/projects/${projectId}/ledger`,
