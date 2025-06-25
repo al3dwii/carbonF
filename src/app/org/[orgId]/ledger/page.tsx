@@ -3,7 +3,8 @@ import LedgerTable from "@/components/ledger/Table";
 import { Suspense } from 'react';
 import { Loading } from '@/components/Loading';
 
-export default function LedgerPage({ params: { orgId } }: { params: { orgId: string } }) {
+export default function LedgerPage({ params }: { params: { orgId: string } }) {
+  const { orgId } = params;
   return (
     <Suspense fallback={<Loading />}>
       <Content orgId={orgId} />

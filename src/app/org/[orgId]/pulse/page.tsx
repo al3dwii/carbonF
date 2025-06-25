@@ -3,7 +3,8 @@ import { fetchVendors } from "@/lib/vendor-api";
 import { Suspense } from 'react';
 import { Loading } from '@/components/Loading';
 
-export default function Pulse({ params: { orgId } }: { params: { orgId: string } }) {
+export default function Pulse({ params }: { params: { orgId: string } }) {
+  const { orgId } = params;
   return (
     <Suspense fallback={<Loading />}>
       <Content orgId={orgId} />

@@ -3,7 +3,8 @@ import { request }  from "@/lib/client";
 import { Suspense } from 'react';
 import { Loading } from '@/components/Loading';
 
-export default function RouterPage({ params: { orgId } }: { params: { orgId: string } }) {
+export default function RouterPage({ params }: { params: { orgId: string } }) {
+  const { orgId } = params;
   return (
     <Suspense fallback={<Loading />}>
       <Content orgId={orgId} />

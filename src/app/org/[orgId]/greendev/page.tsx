@@ -4,7 +4,8 @@ import ChatWindow from '@/components/greendev/ChatWindow';
 import { Suspense } from 'react';
 import { Loading } from '@/components/Loading';
 
-export default function Page({ params: { orgId } }: { params: { orgId: string } }) {
+export default function Page({ params }: { params: { orgId: string } }) {
+  const { orgId } = params;
   if (!orgId) notFound();
   return (
     <Suspense fallback={<Loading />}>

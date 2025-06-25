@@ -1,7 +1,7 @@
 "use client";
 
 import { useApi, useEventSource } from "@/lib/hooks";
-import VirtualTable from "@/components/tables/VirtualTable";
+import { VirtualTable } from "@/components/tables/VirtualTable";
 import { useState } from "react";
 import LiveStreamToggle from "@/components/widgets/LiveStreamToggle";
 

@@ -2,7 +2,8 @@
 import { request } from "@/lib/client";
 import Link from "next/link";
 
-export default async function ProjectsPage({ params:{orgId} }:{params:{orgId:string}}) {
+export default async function ProjectsPage({ params }: { params: { orgId: string } }) {
+  const { orgId } = params;
   const projects = await request(`/org/${orgId}/projects`, "get", { orgId });
   return (
     <div className="p-6">

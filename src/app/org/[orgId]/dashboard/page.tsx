@@ -14,10 +14,11 @@ import { ChartSkeleton } from "@/components/ui/ChartSkeleton";
 
 
 export default async function DashboardPage({
-  params: { orgId },
+  params,
 }: {
   params: { orgId: string };
 }) {
+  const { orgId } = params;
   // Server-side fetches (block render until resolved)
   const [kpis, alertCount, initialBudget] = await Promise.all([
     fetchKpis(orgId),
