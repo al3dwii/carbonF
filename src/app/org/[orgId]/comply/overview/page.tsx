@@ -1,15 +1,32 @@
 import { request } from "@/lib/client";
-import ReportsList from "@/components/comply/ReportsList";
+import DownloadDropdown from "@/components/widgets/DownloadDropdown";
 
-export default async function ComplyOverview({ params:{orgId} }:{params:{orgId:string}}) {
-  const files = await request(`/org/${orgId}/reports?type=csrd`, "get", { orgId });
+export const revalidate = 60;
+
+export default async function ComplyOverview({
+  params: { orgId },
+}: {
+  params: { orgId: string };
+}) {
+  const files = await request<any[]>(`/org/${orgId}/reports?type=csrd`);
   return (
     <div className="p-6">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="flex justify-between mb-6">
         <h1 className="text-2xl">CSRD / ESRS Reports</h1>
-        <ReportsList.GenerateButton orgId={orgId} />
+        <button className="border px-3 py-1">Generate new</button>
       </div>
-      <ReportsList files={files as any} />
+      <ul>
+        {files.map((f) => (
+          <li key={f.id} className="flex items-center gap-4 mb-2">
+            <span>{f.period}</span>
+            <DownloadDropdown
+              onSelect={(fmt) => {
+                window.location.href = `/api/reports/${f.id}.${fmt}`;
+              }}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

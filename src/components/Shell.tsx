@@ -1,15 +1,17 @@
-"use client";
-import { Sidebar }   from "./Sidebar";
-import { UserButton } from "@clerk/nextjs";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import Sidebar from "@/components/Sidebar";
+import Topbar from "@/components/navigation/Topbar";
 
-export function Shell({ children }: { children: React.ReactNode }) {
+export default function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto p-6">{children}</main>
-      <div className="fixed bottom-4 right-6 z-10">
-        <UserButton afterSignOutUrl="/" />
-      </div>
+      <section className="flex-1 flex flex-col">
+        <Topbar />
+        <ErrorBoundary>
+          <main className="flex-1 overflow-auto">{children}</main>
+        </ErrorBoundary>
+      </section>
     </div>
   );
 }
