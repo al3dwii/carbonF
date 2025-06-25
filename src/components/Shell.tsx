@@ -1,11 +1,17 @@
-import ErrorBoundary from "@/components/ErrorBoundary";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/navigation/Topbar";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
-export default function Shell({ children }: { children: React.ReactNode }) {
+export default function Shell({
+  role,
+  children,
+}: {
+  role: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex h-screen">
-      <Sidebar />
+      <Sidebar role={role} />
       <section className="flex-1 flex flex-col">
         <Topbar />
         <ErrorBoundary>
