@@ -1,0 +1,137 @@
+# ┌───────────────────────────────────────────────────────────────────────────
+# │ .gitignore for Python + Next.js 14 + Hugging Face + Marker project 
+# └───────────────────────────────────────────────────────────────────────────
+
+# ------------------------
+# Python
+# ------------------------
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+__pypackages__/
+*.egg
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.nox/
+.tox/
+.pytest_cache/
+.hypothesis/
+
+# Mypy, Pyre, Ruff caches
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# Sphinx documentation
+docs/_build/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# ------------------------
+# Node / Next.js
+# ------------------------
+# Dependencies
+node_modules/
+.pnpm/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+
+# Next.js build outputs
+.next/
+out/
+dist/
+build/
+
+# Environment files
+.env
+.env.*
+.local
+
+# Vercel / deployment
+.vercel/
+.vercel_build_output/
+.cache/
+
+# ------------------------
+# Hugging Face
+# ------------------------
+.cache/huggingface/
+hf_home/
+transformers_cache/
+datasets_cache/
+safe_serialization/
+
+# ------------------------
+# Office & Generated Docs
+# ------------------------
+# (ignore generated output; remove if you want to check in sample .docx)
+*.docx
+*.doc
+*.xlsx
+*.pptx
+
+# ------------------------
+# OS generated
+# ------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ------------------------
+# IDEs and editors
+# ------------------------
+.vscode/
+.vscode-test/
+.idea/
+*.sublime-workspace
+*.code-workspace
+
+# ------------------------
+# Temporary and output
+# ------------------------
+tmp/
+temp/
+output/
+outputs/
+images/
+*.bak
+
+# ------------------------
+# Archives
+# ------------------------
+*.zip
+*.tar
+*.tar.gz
+*.gz
+*.rar

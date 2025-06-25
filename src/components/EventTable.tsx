@@ -1,0 +1,30 @@
+'use client';
+import type { SavingEvent } from '@/lib/types';
+import { fmtKg, fmtUsd } from '@/lib/format';
+
+export function EventTable({ rows }: { rows: SavingEvent[] }) {
+  return (
+    <table className="w-full border-collapse text-sm">
+      <thead>
+        <tr className="text-left text-white/60">
+          <th className="py-2">Project</th>
+          <th>Feature</th>
+          <th>CO₂</th>
+          <th>USD</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(r => (
+          <tr key={r.id} className="border-t border-white/10">
+            <td className="py-2">{r.project_id}</td>
+            <td>{r.feature}</td>
+            <td>{fmtKg.format(r.co2)} kg</td>
+            <td>{fmtUsd.format(r.usd)}</td>
+            <td>{r.created_at.slice(0, 10)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
