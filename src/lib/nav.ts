@@ -2,15 +2,17 @@ export type NavItem = { href: string; label: string; icon: string; flag?: string
 
 export const NAV_BY_ROLE: Record<string, NavItem[]> = {
   developer: [
-    { href: "/dashboard", label: "Dashboard", icon: "📊" },
-    { href: "/plugins", label: "Plugins", icon: "🔌" },
-    { href: "/projects", label: "Projects", icon: "🗂" },
+    { href: "/dashboard", label: "Dashboard", icon: "dashboard" },
+    { href: "/plugins", label: "Plugins", icon: "plug" },
+    { href: "/projects", label: "Projects", icon: "stack" },
+    { href: "/alerts", label: "Alerts", icon: "alert" },
     { href: "/router", label: "Router", icon: "🗺", flag: "router" },
     { href: "/pulse", label: "Pulse", icon: "💓", flag: "pulse" },
     { href: "/ledger", label: "Ledger", icon: "📜" },
     { href: "/scheduler", label: "Scheduler", icon: "⏱", flag: "scheduler" },
     { href: "/iac-advisor", label: "IaC Advisor", icon: "🛠", flag: "iac-advisor" },
-    { href: "/greendev", label: "GreenDev Bot", icon: "🤖", flag: "greendev" }
+    { href: "/greendev", label: "GreenDev Bot", icon: "🤖", flag: "greendev" },
+    { href: "/comply", label: "Comply", icon: "report", flag: "comply" }
   ],
   finops: [
     { href: "/dashboard", label: "Dashboard", icon: "📊" },

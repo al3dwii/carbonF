@@ -1,34 +1,50 @@
 "use client";
-import { useState } from "react";
-import { VirtualTable } from "@/components/ui/VirtualTable";
-import { useApi } from "@/lib/hooks";
 
-export default function AlertTable({ initial = [], orgId }: { initial?: any[]; orgId: string }) {
-  const [status, setStatus] = useState("open");
-  const { data } = useApi<any[]>(`/org/${orgId}/alerts?status=${status}`, { refresh: 10000 });
-  const alerts = data ?? initial;
+import { useApi } from "@/lib/hooks";
+import VirtualTable from "@/components/tables/VirtualTable";
+import { useState } from "react";
+
+export default function AlertTable({
+  initial,
+  orgId,
+}: {
+  initial: any[];
+  orgId: string;
+}) {
+  const [filter, setFilter] = useState<"all" | "open">("all");
+  const { data } = useApi<any[]>(
+    `/org/${orgId}/alerts?filter=${filter}`,
+    { refresh: 5000 }
+  );
+
+  const rows = data ?? initial;
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-2 text-sm">
-        {['open','snoozed','resolved'].map(s => (
-          <button
-            key={s}
-            onClick={() => setStatus(s)}
-            className={`rounded px-2 py-1 ${status===s ? 'bg-blue-600 text-white' : 'bg-neutral-700 text-white/60'}`}
-          >
-            {s}
-          </button>
-        ))}
+    <div>
+      <div className="mb-2">
+        <button
+          className={`mr-2 ${filter === "all" ? "font-semibold" : ""}`}
+          onClick={() => setFilter("all")}
+        >
+          All
+        </button>
+        <button
+          className={filter === "open" ? "font-semibold" : ""}
+          onClick={() => setFilter("open")}
+        >
+          Open
+        </button>
       </div>
+
       <VirtualTable
-        items={alerts}
+        items={rows}
         rowHeight={36}
-        renderRow={(a) => (
-          <div className="grid grid-cols-[160px_1fr_80px] gap-2 px-2 text-sm" key={a.id}>
-            <span>{new Date(a.time).toLocaleString()}</span>
-            <span>{a.msg}</span>
-            <span className="text-right">{a.status}</span>
+        renderRow={(item) => (
+          <div className="flex w-full">
+            <div className="w-40 px-2">{new Date(item.time).toLocaleString()}</div>
+            <div className="w-24 px-2">{item.source}</div>
+            <div className="flex-1 px-2">{item.msg}</div>
+            <div className="w-24 px-2">{item.status}</div>
           </div>
         )}
       />
