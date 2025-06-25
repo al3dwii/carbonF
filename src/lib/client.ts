@@ -60,6 +60,20 @@ const FIXTURES: Record<string, unknown> = {
   "/org/{orgId}/kpi": [
     { id: "energy",    label: "kWh",  value: 42_000 },
     { id: "emissions", label: "tCO₂", value: 123.4 }
+  ],
+
+  "/org/{orgId}/projects": [
+    { id: "p1", name: "GreenShop" }
+  ],
+
+  "/org/{orgId}/projects/{projectId}/summary": { id: "p1", name: "GreenShop" },
+
+  "/org/{orgId}/alerts": [
+    { id: 1, time: Date.now(), source: "budget", msg: "Forecast overshoot", status: "open" }
+  ],
+
+  "/org/{orgId}/reports?type=csrd": [
+    { id: "r1", period: "FY2026", link: "#" }
   ]
 
   
