@@ -1,26 +1,25 @@
 "use client";
 
 import { useOrgStore } from "@/lib/stores";
-import Link from "next/link";
+import OrgSwitcher from "@/components/org/OrgSwitcher";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/Dialog";
+import QuickActions from "@/components/dashboard/QuickActions";
+import AvatarMenu from "@/components/navigation/AvatarMenu";
 
 export default function Topbar() {
   const { orgId } = useOrgStore();
 
   return (
-    <header className="h-12 border-b flex items-center justify-between px-4">
+    <header className="flex items-center justify-between bg-white p-4 shadow">
+      <OrgSwitcher currentId={orgId} />
       <div className="flex items-center gap-4">
-        <select className="border rounded text-sm px-2 py-1">
-          <option>{orgId}</option>
-          {/* TODO: dynamic org list */}
-        </select>
-        <button className="border rounded px-3 py-1 text-sm">Create…</button>
-      </div>
-
-      <div className="flex items-center gap-4">
-        <Link href={`/org/${orgId}/alerts`} className="text-xl">
-          🔔
-        </Link>
-        <div className="w-8 h-8 rounded-full bg-gray-300" />
+        <Dialog>
+          <DialogTrigger className="btn">Create…</DialogTrigger>
+          <DialogContent className="max-w-lg">
+            <QuickActions />
+          </DialogContent>
+        </Dialog>
+        <AvatarMenu />
       </div>
     </header>
   );

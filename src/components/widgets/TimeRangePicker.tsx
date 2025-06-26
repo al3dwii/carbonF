@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export type Range = "7d" | "30d" | "custom";
 
 export default function TimeRangePicker({
+  value,
   onChange,
 }: {
+  value: Range;
   onChange: (r: Range, custom?: [Date, Date]) => void;
 }) {
-  const [range, setRange] = useState<Range>("7d");
+  const [range, setRange] = useState<Range>(value);
+  // sync when parent changes
+  useEffect(() => setRange(value), [value]);
 
   return (
     <div className="inline-flex border rounded overflow-hidden">
