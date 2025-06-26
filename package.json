@@ -32,6 +32,7 @@
     "react-hot-toast": "^2.5.2",
     "react-leaflet": "^5.0.0",
     "react-markdown": "^10.1.0",
+    "react-use": "^17.4.0",
     "react-virtualized-auto-sizer": "^1.0.26",
     "react-window": "^1.8.11",
     "recharts": "^3.0.0",

@@ -2,11 +2,11 @@ import { request } from "@/lib/client";
 
 export default async function ProjectTeam(
   props: {
-  params: { orgId: string; projectId: string };
+  params: Promise<{ orgId: string; projectId: string }>;
   },
 ) {
   await Promise.resolve();
-  const { orgId, projectId } = props.params;
+  const { orgId, projectId } = await props.params;
   const team = await request<{ id: string; name: string; role: string }[]>(
     `/org/${orgId}/projects/${projectId}/team`
   );

@@ -6,10 +6,10 @@ export default async function OrgLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { orgId: string };
+  params: Promise<{ orgId: string }>;
 }) {
   /* 1️⃣  capture the dynamic segment immediately */
-  const { orgId } = params;        // ⬅️  NO await yet!
+  const { orgId } = await params;        // ⬅️  NO await yet!
 
   /* 2️⃣  now you’re free to await anything */
   const role = await getServerRole();

@@ -2,11 +2,11 @@ import { request } from "@/lib/client";
 
 export default async function ProjectPlugins(
   props: {
-  params: { orgId: string; projectId: string };
+  params: Promise<{ orgId: string; projectId: string }>;
   },
 ) {
   await Promise.resolve();
-  const { orgId, projectId } = props.params;
+  const { orgId, projectId } = await props.params;
   const plugins = await request<
     { slug: string; title: string; enabled: boolean }[]
   >(`/org/${orgId}/projects/${projectId}/plugins`);

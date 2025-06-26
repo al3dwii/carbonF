@@ -2,10 +2,10 @@ import { api } from "@/lib/api";
 import { AsyncStates } from "@/components/ui/AsyncStates";
 
 export default async function Page(
-  props: { params: { orgId: string } },
+  props: { params: Promise<{ orgId: string }> },
 ) {
   await Promise.resolve();
-  const { orgId } = props.params;
+  const { orgId } = await props.params;
   const data = await api.getEcoLabelStats(orgId);
   const list = Array.isArray(data) ? data : [];
   if (!list.length) return <AsyncStates state="empty" message="No page views yet." />;

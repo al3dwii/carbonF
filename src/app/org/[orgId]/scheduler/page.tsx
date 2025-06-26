@@ -3,10 +3,10 @@ import { request } from "@/lib/client";
 import { Suspense } from 'react';
 import { Loading } from '@/components/Loading';
 
-export default function SchedulerPage(
-  props: { params: { orgId: string } },
+export default async function SchedulerPage(
+  props: { params: Promise<{ orgId: string }> },
 ) {
-  const { orgId } = props.params;
+  const { orgId } = await props.params;
   return (
     <Suspense fallback={<Loading />}>
       <Content orgId={orgId} />

@@ -3,10 +3,10 @@ import { request } from "@/lib/client";
 import { Tabs } from "@/components/ui/Tabs";          // assume you have one
 
 export default async function ProjectPage(
-  props: { params:{orgId:string;projectId:string} },
+  props: { params: Promise<{orgId:string;projectId:string}> },
 ) {
   await Promise.resolve();
-  const { orgId, projectId } = props.params;
+  const { orgId, projectId } = await props.params;
   const summary = await request(`/org/${orgId}/projects/${projectId}/summary`);
   return (
     <div className="p-6">
