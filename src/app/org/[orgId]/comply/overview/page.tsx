@@ -11,6 +11,7 @@ export default async function ComplyOverview(
 ) {
   const { orgId } = props.params;
   const files = await request<any[]>(`/org/${orgId}/reports?type=csrd`);
+  const list = Array.isArray(files) ? files : [];
   return (
     <div className="p-6">
       <div className="flex justify-between mb-6">
@@ -18,7 +19,7 @@ export default async function ComplyOverview(
         <ReportWizard orgId={orgId} />
       </div>
       <ul>
-        {files.map((f) => (
+        {list.map((f) => (
           <li key={f.id} className="flex items-center gap-4 mb-2">
             <span>{f.period}</span>
             <DownloadDropdown

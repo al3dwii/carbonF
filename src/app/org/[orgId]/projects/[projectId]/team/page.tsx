@@ -9,6 +9,7 @@ export default async function ProjectTeam(
   const team = await request<{ id: string; name: string; role: string }[]>(
     `/org/${orgId}/projects/${projectId}/team`
   );
+  const list = Array.isArray(team) ? team : [];
 
   return (
     <div className="p-6">
@@ -21,7 +22,7 @@ export default async function ProjectTeam(
           </tr>
         </thead>
         <tbody>
-          {team.map((m) => (
+          {list.map((m) => (
             <tr key={m.id} className="border-b">
               <td className="py-1">{m.name}</td>
               <td className="py-1">{m.role}</td>

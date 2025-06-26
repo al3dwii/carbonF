@@ -82,4 +82,24 @@ export const handlers = [
       ])
     )
   ),
+
+  // Router policy
+  rest.get("/api/org/:orgId/router", (_, res, ctx) =>
+    res(ctx.json({ weight: 0.5 }))
+  ),
+
+  // Vendors
+  rest.get("/api/org/:orgId/vendors", (_, res, ctx) =>
+    res(ctx.json([]))
+  ),
+
+  // Jobs / scheduler
+  rest.get("/api/org/:orgId/jobs", (_, res, ctx) =>
+    res(ctx.json([]))
+  ),
+
+  // Ledger summary
+  rest.get("/api/org/:orgId/ledger", (_, res, ctx) =>
+    res(ctx.json([]))
+  ),
 ];
