@@ -5,6 +5,7 @@ import Link from "next/link";
 export default async function ProjectsPage(
   props: { params: { orgId: string } },
 ) {
+  await Promise.resolve();
   const { orgId } = props.params;
   const projects = await request(`/org/${orgId}/projects`, "get", { orgId });
   const list = Array.isArray(projects) ? projects : [];

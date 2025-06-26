@@ -1,20 +1,5 @@
-import RouterView from "@/components/router/RouterView";
-import { request }  from "@/lib/client";
-import { Suspense } from 'react';
-import { Loading } from '@/components/Loading';
+import RouterClient from "./RouterClient";
 
-export default function RouterPage(
-  props: { params: { orgId: string } },
-) {
-  const { orgId } = props.params;
-  return (
-    <Suspense fallback={<Loading />}>
-      <Content orgId={orgId} />
-    </Suspense>
-  );
-}
-
-async function Content({ orgId }: { orgId: string }) {
-  const data = await request("/org/{orgId}/router", "get", { orgId });
-  return <RouterView initial={data} orgId={orgId} />;
+export default function RouterPage({ params:{orgId} }:{ params:{orgId:string} }) {
+  return <RouterClient orgId={orgId} />;
 }

@@ -11,6 +11,7 @@ export default async function ProjectLedger(
   params: { orgId: string; projectId: string };
   },
 ) {
+  await Promise.resolve();
   const { orgId, projectId } = props.params;
   /* server fetch for first paint */
   const initial = await request<any[]>(

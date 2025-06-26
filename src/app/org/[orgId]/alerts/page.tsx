@@ -6,6 +6,7 @@ export const revalidate = 10;
 export default async function AlertsPage(
   props: { params: { orgId: string } },
 ) {
+  await Promise.resolve();
   const { orgId } = props.params;
   const data = await request(`/org/${orgId}/alerts`);
   return (

@@ -5,6 +5,7 @@ import { Tabs } from "@/components/ui/Tabs";          // assume you have one
 export default async function ProjectPage(
   props: { params:{orgId:string;projectId:string} },
 ) {
+  await Promise.resolve();
   const { orgId, projectId } = props.params;
   const summary = await request(`/org/${orgId}/projects/${projectId}/summary`);
   return (

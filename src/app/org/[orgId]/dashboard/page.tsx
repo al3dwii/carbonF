@@ -18,6 +18,7 @@ export default async function DashboardPage(
     params: { orgId: string };
   },
 ) {
+  await Promise.resolve();
   const { orgId } = props.params;
   // Server-side fetches (block render until resolved)
   const [kpis, alertCount, initialBudget] = await Promise.all([
