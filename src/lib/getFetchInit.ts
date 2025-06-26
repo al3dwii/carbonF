@@ -8,7 +8,7 @@ export async function getFetchInit() {
   /* second await – before first touch */
   await Promise.resolve();
 
-  const headerList = headers();             // 1st use (OK)
+  const headerList = await headers();             // 1st use (OK)
 
   /* third await – before **iterating again** inside Object.fromEntries */
   await Promise.resolve();

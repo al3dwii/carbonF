@@ -8,9 +8,9 @@ const JsonViewer = dynamic(() => import('react-json-view'), { ssr: false });
 const DiffViewer = dynamic(() => import('react-json-view-diff'), { ssr: false });
 
 export default async function EventDetail(
-  props: { params: { eventId: string } },
+  props: { params: Promise<{ eventId: string }> },
 ) {
-  const { eventId } = props.params;
+  const { eventId } = await props.params;
   const ev = await request(`/api/events/${eventId}`);
   if (!ev) notFound();
   const prev = (ev as any).prev ?? null;

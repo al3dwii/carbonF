@@ -4,10 +4,10 @@ import ChatWindow from '@/components/greendev/ChatWindow';
 import { Suspense } from 'react';
 import { Loading } from '@/components/Loading';
 
-export default function Page(
-  props: { params: { orgId: string } },
+export default async function Page(
+  props: { params: Promise<{ orgId: string }> },
 ) {
-  const { orgId } = props.params;
+  const { orgId } = await props.params;
   if (!orgId) notFound();
   return (
     <Suspense fallback={<Loading />}>

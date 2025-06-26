@@ -4,10 +4,10 @@ import AlertTable from "@/components/alerts/AlertTable"; // create if missing
 export const revalidate = 10;
 
 export default async function AlertsPage(
-  props: { params: { orgId: string } },
+  props: { params: Promise<{ orgId: string }> },
 ) {
   await Promise.resolve();
-  const { orgId } = props.params;
+  const { orgId } = await props.params;
   const data = await request(`/org/${orgId}/alerts`);
   return (
     <div className="p-6">

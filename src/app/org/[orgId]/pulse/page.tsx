@@ -3,10 +3,10 @@ import { fetchVendors } from "@/lib/vendor-api";
 import { Suspense } from 'react';
 import { Loading } from '@/components/Loading';
 
-export default function Pulse(
-  props: { params: { orgId: string } },
+export default async function Pulse(
+  props: { params: Promise<{ orgId: string }> },
 ) {
-  const { orgId } = props.params;
+  const { orgId } = await props.params;
   return (
     <Suspense fallback={<Loading />}>
       <Content orgId={orgId} />

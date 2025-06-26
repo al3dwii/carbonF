@@ -134,7 +134,7 @@ export async function request<
   let token: string | undefined;
   if (typeof window === "undefined") {
     const { cookies } = await import("next/headers");
-    const jar = cookies();
+    const jar = await cookies();
     token = jar.get("__session")?.value ?? jar.get("__Secure-session")?.value;
   }
   // (in the browser the cookie travels automatically)

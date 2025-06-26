@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 
-export default function OrgIndexPage(
-  props: { params: { orgId: string } },
+export default async function OrgIndexPage(
+  props: { params: Promise<{ orgId: string }> },
 ) {
-  redirect(`/org/${props.params.orgId}/dashboard`);
+  const { orgId } = await props.params;
+  redirect(`/org/${orgId}/dashboard`);
 }

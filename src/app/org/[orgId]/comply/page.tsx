@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 
-export default function ComplyIndex(
-  props: { params: { orgId: string } },
+export default async function ComplyIndex(
+  props: { params: Promise<{ orgId: string }> },
 ) {
-  const { orgId } = props.params;
+  const { orgId } = await props.params;
   redirect(`/org/${orgId}/comply/overview`);
 }

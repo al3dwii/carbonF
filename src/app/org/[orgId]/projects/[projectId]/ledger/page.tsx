@@ -8,11 +8,11 @@ export const revalidate = 10;
 
 export default async function ProjectLedger(
   props: {
-  params: { orgId: string; projectId: string };
+  params: Promise<{ orgId: string; projectId: string }>;
   },
 ) {
   await Promise.resolve();
-  const { orgId, projectId } = props.params;
+  const { orgId, projectId } = await props.params;
   /* server fetch for first paint */
   const initial = await request<any[]>(
     `/org/${orgId}/projects/${projectId}/ledger`,

@@ -6,11 +6,11 @@ export const revalidate = 60;
 
 export default async function ComplyOverview(
   props: {
-  params: { orgId: string };
+  params: Promise<{ orgId: string }>;
   },
 ) {
   await Promise.resolve();
-  const { orgId } = props.params;
+  const { orgId } = await props.params;
   const files = await request<any[]>(`/org/${orgId}/reports?type=csrd`);
   const list = Array.isArray(files) ? files : [];
   return (
