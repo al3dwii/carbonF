@@ -5,14 +5,14 @@ import QuickActions from "@/components/quick-actions/QuickActions.client";
 import { AlertBanner }       from "@/components/alerts/AlertBanner";
 import BudgetBanner from "@/components/budget/BudgetBanner";
 import { useGlobalShortcuts } from "@/lib/shortcuts";
-import { getSession } from "@/lib/auth";
+import { getRole }   from "@/lib/auth.server";
 import { EmissionChart }     from "@/components/dashboard/EmissionChart.client";
 import { LedgerPreview }     from "@/components/ledger/LedgerPreview";
 import { PageMetrics }       from "@/components/dashboard/PageMetrics.client";
 import { PluginCards }       from "@/components/dashboard/PluginCards.client";
 import EcoShiftWidget from "@/components/product/EcoShiftWidget";
-import EcoEdgeWidget  from "@/components/product/EcoEdgeWidget";
-import TrendSection from "@/components/charts/TrendSection.client";
+import  EcoEdgeWidget  from "@/components/product/EcoEdgeWidget";
+import TrendSection from "@/components/charts/TrendSection";
 import { fetchAlertCount }    from "@/lib/alerts-api";
 import { ChartSkeleton } from "@/components/ui/ChartSkeleton";
 
@@ -32,13 +32,12 @@ export default async function DashboardPage(
 ) {
   await Promise.resolve();
   const { orgId } = await props.params;
-  const { roles } = await getSession();
+  const  role  = await getRole();
   const focusId =
-    roles.includes("finance")
-      ? "budget-section"
-      : roles.includes("developer")
-        ? "ledger-section"
-        : "trend-section";
+    role === "ops"      ? "budget-section" :
+  role === "dev"      ? "ledger-section"  :
+                        "trend-section";
+  
   // Server-side fetches (block render until resolved)
   const [alertCount] = await Promise.all([
     fetchAlertCount(orgId),

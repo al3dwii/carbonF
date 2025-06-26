@@ -1,5 +1,7 @@
 "use client";
-import { Dialog, DialogTrigger, DialogContent } from "@radix-ui/react-dialog";
+
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/Dialog";
+
 import BudgetForm from "./BudgetForm.client";
 import InviteForm from "./InviteForm.client";
 import ComplianceReportForm from "./ComplianceReportForm.client";

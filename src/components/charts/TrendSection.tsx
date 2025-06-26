@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import TrendChart from "./TrendChart.client";
-import { DateRangePicker } from "@/components/ui/DateRangePicker";
+import TrendChart from "./TrendChart";
+import  DateRangePicker from "@/components/ui/DateRangePicker";
 
 export default function TrendSection({ orgId }: { orgId: string }) {
   const [period, setPeriod] = useState<"7d" | "30d" | "90d" | "custom">("30d");

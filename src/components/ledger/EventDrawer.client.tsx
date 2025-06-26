@@ -1,4 +1,4 @@
-import { Dialog, DialogTrigger, DialogContent } from "@radix-ui/react-dialog";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/Dialog";
 
 export function EventDrawer({ event, children }: any) {
   return (
