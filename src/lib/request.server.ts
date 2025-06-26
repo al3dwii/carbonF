@@ -1,3 +1,5 @@
+import { getFetchInit } from './getFetchInit';
+
 const LOCAL_BASE =
   process.env.NEXT_PUBLIC_API_BASE ??
   (process.env.NODE_ENV === 'production'
@@ -21,9 +23,8 @@ export async function request<T = unknown>(
   /* ──  only when *actually* running on the server ─────────────── */
   let cookieHeaders: Record<string, string> = {};
   if (typeof window === 'undefined') {
-    const { headers } = await import('next/headers'); // ★ dynamic
-    const h = await headers();
-    cookieHeaders = Object.fromEntries(h);
+    const { headers: h } = await getFetchInit();
+    cookieHeaders = h;
   }
 
   const res = await fetch(url, {
