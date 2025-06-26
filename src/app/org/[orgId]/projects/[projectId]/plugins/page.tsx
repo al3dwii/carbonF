@@ -5,6 +5,7 @@ export default async function ProjectPlugins(
   params: { orgId: string; projectId: string };
   },
 ) {
+  await Promise.resolve();
   const { orgId, projectId } = props.params;
   const plugins = await request<
     { slug: string; title: string; enabled: boolean }[]

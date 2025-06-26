@@ -9,6 +9,7 @@ export default async function ComplyOverview(
   params: { orgId: string };
   },
 ) {
+  await Promise.resolve();
   const { orgId } = props.params;
   const files = await request<any[]>(`/org/${orgId}/reports?type=csrd`);
   const list = Array.isArray(files) ? files : [];

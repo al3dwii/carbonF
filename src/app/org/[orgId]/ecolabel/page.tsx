@@ -4,6 +4,7 @@ import { AsyncStates } from "@/components/ui/AsyncStates";
 export default async function Page(
   props: { params: { orgId: string } },
 ) {
+  await Promise.resolve();
   const { orgId } = props.params;
   const data = await api.getEcoLabelStats(orgId);
   const list = Array.isArray(data) ? data : [];
