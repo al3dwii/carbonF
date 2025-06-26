@@ -1,7 +1,7 @@
 "use client";
 
 import { useOrgStore } from "@/lib/stores";
-import OrgSwitcher from "@/components/org/OrgSwitcher";
+import { OrgSwitcher } from "@/components/org/OrgSwitcher";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/Dialog";
 import QuickActions from "@/components/dashboard/QuickActions";
 import AvatarMenu from "@/components/navigation/AvatarMenu";
