@@ -14,7 +14,7 @@ export default async function Page(
       <PageWrapper>
         <h1 className="mb-6 text-2xl font-bold">GreenDev Bot 🤖</h1>
         <div className="h-[60vh] rounded border">
-          <ChatWindow />
+          <ChatWindow orgId={orgId} />
         </div>
       </PageWrapper>
     </Suspense>

@@ -4,9 +4,11 @@ import { useState, useRef } from "react";
 import { useClickAway } from "react-use";
 
 export default function DownloadDropdown({
+  endpoint,
   onSelect,
 }: {
-  onSelect: (fmt: "csv" | "xlsx" | "pdf") => void;
+  endpoint?: string;
+  onSelect?: (fmt: "csv" | "xlsx" | "pdf") => void;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -27,7 +29,8 @@ export default function DownloadDropdown({
               <button
                 className="block w-full px-3 py-1 text-left text-sm hover:bg-gray-100"
                 onClick={() => {
-                  onSelect(fmt);
+                  if (onSelect) onSelect(fmt);
+                  if (endpoint) window.location.href = `${endpoint}.${fmt}`;
                   setOpen(false);
                 }}
               >

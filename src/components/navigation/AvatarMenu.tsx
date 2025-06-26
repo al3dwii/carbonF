@@ -7,8 +7,8 @@ export default function AvatarMenu() {
     <Menu as="div" className="relative">
       <Menu.Button className="w-8 h-8 rounded-full bg-gray-300" />
       <Menu.Items className="absolute right-0 mt-2 rounded bg-white shadow">
-        <Menu.Item onSelect={() => i18n.changeLanguage("en")}>English</Menu.Item>
-        <Menu.Item onSelect={() => i18n.changeLanguage("ar")}>العربية</Menu.Item>
+        <Menu.Item onClick={() => i18n.changeLanguage("en")}>English</Menu.Item>
+        <Menu.Item onClick={() => i18n.changeLanguage("ar")}>العربية</Menu.Item>
       </Menu.Items>
     </Menu>
   );

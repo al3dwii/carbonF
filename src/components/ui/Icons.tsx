@@ -1,12 +1,12 @@
 import {
-  LayoutDashboard, Tangent, ActivitySquare, FileText,
+  LayoutDashboard, Tangent as BezierCurve, ActivitySquare, FileText,
   Plug, Layers, AlertTriangle, BarChart,
   Clock, Wrench, Bot, Wallet, Leaf, Tag, Settings,
 } from "lucide-react";
 
 export const Icons = {
   dashboard: LayoutDashboard,
-  router: Tangent,
+  router: BezierCurve,
   pulse: ActivitySquare,
   ledger: FileText,
   plug: Plug,

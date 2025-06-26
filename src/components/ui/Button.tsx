@@ -4,13 +4,10 @@ import { cn } from "@/lib/utils";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+  variant?: "default" | "outline" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
   asChild?: boolean;
 }
-
-export type ButtonVariant = "default" | "outline" | "ghost";
-export type ButtonSize = "sm" | "md" | "lg";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { className, ...props }, ref
