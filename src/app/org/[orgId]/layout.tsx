@@ -1,11 +1,22 @@
 import Shell from "@/components/Shell";
+import { getServerRole } from "@/lib/getRole.server";
 
-export default function OrgLayout({
+export default async function OrgLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { orgId: string };
 }) {
-  return <Shell role="developer" orgId={params.orgId}>{children}</Shell>;
+  /* 1️⃣  capture the dynamic segment immediately */
+  const { orgId } = params;        // ⬅️  NO await yet!
+
+  /* 2️⃣  now you’re free to await anything */
+  const role = await getServerRole();
+
+  return (
+    <Shell role={role ?? "developer"} orgId={orgId}>
+      {children}
+    </Shell>
+  );
 }
