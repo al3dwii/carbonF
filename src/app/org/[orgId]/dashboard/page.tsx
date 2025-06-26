@@ -33,7 +33,7 @@ export default async function DashboardPage({
   // ─────────────────────────────────────────────────────────────
   // 2. Server fetches that block initial render
   // ─────────────────────────────────────────────────────────────
-  const { orgId }  = params;
+  const { orgId }  = await params;
   const alertCount = await fetchAlertCount(orgId);
 
   // ─────────────────────────────────────────────────────────────
