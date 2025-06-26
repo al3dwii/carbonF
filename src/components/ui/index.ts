@@ -13,3 +13,4 @@ export { Combobox } from './Combobox';
 export { Dialog, DialogTrigger, DialogContent } from './Dialog';
 export { default as Tabs } from './Tabs';
 export { Slider } from './Slider';
+export { StatCard, SkeletonCards } from "./StatCard";

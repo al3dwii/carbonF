@@ -11,3 +11,8 @@ jobs:
       - run: pnpm test -- --run
       - run: pnpm exec playwright install --with-deps
       - run: pnpm exec playwright test
+      - name: Build (strict mode)
+        run: |
+          pnpm install --frozen-lockfile
+          CI=true pnpm exec next build
+      - run: lhci autorun || true
