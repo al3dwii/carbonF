@@ -1,24 +1,23 @@
-import { request } from "@/lib/client";
+import FilterBar from "@/components/ledger/FilterBar";
+import BalanceTrendChart from "@/components/ledger/BalanceTrendChart";
+import LiveStreamToggle from "@/components/widgets/LiveStreamToggle";
+import DownloadDropdown from "@/components/widgets/DownloadDropdown";
 import LedgerTable from "@/components/ledger/Table";
-import { Suspense } from 'react';
-import { Loading } from '@/components/Loading';
 
-export default function LedgerPage(
-  props: { params: { orgId: string } },
-) {
-  const { orgId } = props.params;
+export default function LedgerPage({ params: { orgId } }) {
   return (
-    <Suspense fallback={<Loading />}>
-      <Content orgId={orgId} />
-    </Suspense>
-  );
-}
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <FilterBar orgId={orgId} />
+        <div className="flex gap-2">
+          <LiveStreamToggle scope="ledger" />
+          <DownloadDropdown endpoint={`/api/org/${orgId}/ledger/export`} />
+        </div>
+      </div>
 
-async function Content({ orgId }: { orgId: string }) {
-  const events = await request(
-    "/org/{orgId}/ledger",
-    "get",
-    { orgId }
+      <BalanceTrendChart orgId={orgId} />
+
+      <LedgerTable orgId={orgId} />
+    </div>
   );
-  return <LedgerTable initial={events as any} orgId={orgId} />;
 }

@@ -1,7 +1,6 @@
 import { DashboardLayout }  from "@/components/dashboard/DashboardLayout";
 import { Suspense }          from "react";
-import { fetchKpis }         from "@/lib/kpi-api";
-import { KpiGrid }           from "@/components/kpi/KpiGrid";
+import KpiGrid from "@/components/dashboard/KpiGrid";
 import { QuickActions }      from "@/components/dashboard/QuickActions";
 import { AlertBanner }       from "@/components/alerts/AlertBanner";
 import { EmissionChart }     from "@/components/dashboard/EmissionChart.client";
@@ -9,7 +8,6 @@ import { LedgerPreview }     from "@/components/ledger/LedgerPreview";
 import { PageMetrics }       from "@/components/dashboard/PageMetrics.client";
 import { PluginCards }       from "@/components/dashboard/PluginCards.client";
 import { fetchAlertCount }    from "@/lib/alerts-api";
-import { fetchCurrentBudget } from "@/lib/budget-api";
 import { ChartSkeleton } from "@/components/ui/ChartSkeleton";
 
 
@@ -21,10 +19,8 @@ export default async function DashboardPage(
   await Promise.resolve();
   const { orgId } = props.params;
   // Server-side fetches (block render until resolved)
-  const [kpis, alertCount, initialBudget] = await Promise.all([
-    fetchKpis(orgId),
+  const [alertCount] = await Promise.all([
     fetchAlertCount(orgId),
-    fetchCurrentBudget(orgId),
   ]);
 
   return (
@@ -35,11 +31,7 @@ export default async function DashboardPage(
       <QuickActions orgId={orgId} />
 
       {/* Row 2 – KPI grid (includes live RemainingBudget tile) */}
-      <KpiGrid
-        kpis={kpis.items}
-        initialRemaining={initialBudget.remaining}
-        orgId={orgId}
-      />
+      <KpiGrid orgId={orgId} />
 
       {/* Row 3 – 30 day emissions vs budget chart */}
       {/* <Suspense fallback={<ChartSkeleton />}> */}

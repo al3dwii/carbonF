@@ -1,22 +1,27 @@
 "use client";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/Dialog";
+import GenerateReportForm from "./action-forms/GenerateReportForm";
+import InviteForm from "./action-forms/InviteForm";
+import BudgetForm from "./action-forms/BudgetForm";
 
-import Link from "next/link";
+const actions = [
+  { label: "Generate report", Form: GenerateReportForm },
+  { label: "Invite teammate", Form: InviteForm },
+  { label: "Create budget", Form: BudgetForm },
+];
 
-export function QuickActions({ orgId }: { orgId?: string }) {
+export function QuickActions() {
   return (
-    <div className="flex gap-3">
-      <Link
-        href={orgId ? `/org/${orgId}/ledger/new` : "#"}
-        className="rounded bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
-      >
-        + Log saving
-      </Link>
-      <Link
-        href={orgId ? `/org/${orgId}/reports` : "#"}
-        className="rounded border px-4 py-2 text-sm hover:bg-neutral-50"
-      >
-        Generate report
-      </Link>
+    <div className="flex gap-2">
+      {actions.map(({ label, Form }) => (
+        <Dialog key={label}>
+          <DialogTrigger className="btn btn-sm">{label}</DialogTrigger>
+          <DialogContent className="max-w-lg">
+            <Form />
+          </DialogContent>
+        </Dialog>
+      ))}
     </div>
   );
 }
+export default QuickActions;

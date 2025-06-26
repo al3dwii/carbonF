@@ -102,4 +102,27 @@ export const handlers = [
   rest.get("/api/org/:orgId/ledger", (_, res, ctx) =>
     res(ctx.json([]))
   ),
+
+  // Org snapshot
+  rest.get("/api/org/:orgId/snapshot", (_, res, ctx) =>
+    res(
+      ctx.json({
+        total: 12000,
+        totalTrend: Array.from({ length: 30 }, () => Math.random() * 100),
+        co2: 42,
+        co2Trend: Array.from({ length: 30 }, () => Math.random()),
+        topProject: { name: "GreenShop", trend: [1,2,3,4,5] },
+      })
+    )
+  ),
+
+  // Balance trend
+  rest.get("/api/org/:orgId/balance/trend", (_, res, ctx) =>
+    res(
+      ctx.json(
+        Array.from({ length: 10 }, (_, i) => ({ day: `d${i}`, balance: i * 1000 }))
+      )
+    )
+  ),
+
 ];
