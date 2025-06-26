@@ -4,12 +4,12 @@ import ReportWizard from "@/components/comply/ReportWizard.client";
 
 export const revalidate = 60;
 
-export default async function ComplyOverview({
-  params,
-}: {
+export default async function ComplyOverview(
+  props: {
   params: { orgId: string };
-}) {
-  const { orgId } = params;
+  },
+) {
+  const { orgId } = props.params;
   const files = await request<any[]>(`/org/${orgId}/reports?type=csrd`);
   return (
     <div className="p-6">
