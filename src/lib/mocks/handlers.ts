@@ -125,4 +125,17 @@ export const handlers = [
     )
   ),
 
+  rest.get("/api/org/:id/router/logs/stream", (_req, res, ctx) =>
+    ctx.eventStream((send) =>
+      setInterval(() => send({ data: JSON.stringify({ ts: Date.now(), msg: "fake log"}) }), 3000),
+    ),
+  ),
+  rest.get("/api/org/:id/balance-trend", (_req, res, ctx) =>
+    res(
+      ctx.json(Array.from({ length: 30 }, (_, i) => ({
+        day: i, balance: 10_000 + Math.random() * 5_000,
+      })))
+    ),
+  ),
+
 ];

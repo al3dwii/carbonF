@@ -1,25 +1,16 @@
 "use client";
-import { useState } from "react";
-
 export default function LiveStreamToggle({
-  enabled,
-  onToggle,
-}: {
-  enabled: boolean;
-  onToggle: (v: boolean) => void;
-}) {
-  const [state, setState] = useState(enabled);
+  enabled, onToggle,
+}: { enabled: boolean; onToggle: (v: boolean) => void }) {
   return (
-    <label className="inline-flex items-center gap-2 cursor-pointer select-none">
+    <label className="flex items-center gap-2 cursor-pointer select-none">
       <input
         type="checkbox"
-        checked={state}
-        onChange={(e) => {
-          setState(e.target.checked);
-          onToggle(e.target.checked);
-        }}
+        checked={enabled}
+        onChange={(e) => onToggle(e.target.checked)}
+        className="toggle"
       />
-      Live stream
+      Live
     </label>
   );
 }

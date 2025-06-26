@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { NAV_BY_ROLE } from "@/lib/nav";
 import { useOrgStore } from "@/lib/stores";
 import { useFlags } from "@/lib/useFlags";
+import { Icons } from "@/components/ui/Icons";
 
 export default function Sidebar({ role }: { role: string }) {
   const { orgId } = useOrgStore();
@@ -18,19 +19,23 @@ export default function Sidebar({ role }: { role: string }) {
   return (
     <aside className="w-56 border-r">
       <ul>
-        {items.map(({ href, label }) => (
-          <li key={label}>
-            <Link
-              href={`/org/${orgId}${href}`}
-              className={clsx(
-                "block px-4 py-2",
-                path?.startsWith(`/org/${orgId}${href}`) && "font-semibold"
-              )}
-            >
-              {label}
-            </Link>
-          </li>
-        ))}
+        {items.map((item) => {
+          const Icon = Icons[item.icon];
+          return (
+            <li key={item.label}>
+              <Link
+                href={`/org/${orgId}${item.href}`}
+                className={clsx(
+                  "block px-4 py-2 flex items-center gap-2",
+                  path?.startsWith(`/org/${orgId}${item.href}`) && "font-semibold"
+                )}
+              >
+                {Icon && <Icon className="h-4 w-4" />}
+                {item.label}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );

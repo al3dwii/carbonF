@@ -1,38 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { LedgerEventSchema, type LedgerEvent } from "@/lib/schemas";
-import { useEventSource } from "@/lib/useEventSource";
-import { toastSuccess } from "@/lib/toast";
+import { LedgerEvent } from "@/lib/schemas";
+import { useSSE } from "@/lib/hooks/useSSE";
 
 export default function LedgerTable({
-  initial,
+  initialRows,
   orgId,
+  live,
 }: {
-  initial: LedgerEvent[] | null | undefined;
+  initialRows: LedgerEvent[];
   orgId: string;
+  live: boolean;
 }) {
-  /* 1 ─ guarantee the state is an array */
-  const [rows, setRows] = useState<LedgerEvent[]>(() =>
-    Array.isArray(initial) ? initial : []
+  const liveData = useSSE<LedgerEvent[]>(
+    `/api/proxy/org/${orgId}/ledger/stream`,
+    live
   );
-
-  /* 2 ─ use the current hook signature: [data, err, status] */
-  const [event] = useEventSource<LedgerEvent>(
-    `/api/proxy/org/${orgId}/ledger/stream`
-  );
-
-  /* 3 ─ apply side-effects only when a new event arrives */
-  useEffect(() => {
-    if (!event) return;
-    try {
-      const evt = LedgerEventSchema.parse(event); // zod runtime check
-      setRows(r => [evt, ...r]);
-      toastSuccess(evt.message);
-    } catch {
-      /* ignore schema mismatch */
-    }
-  }, [event]);
+  const rows = live ? liveData ?? initialRows : initialRows;
 
   /* 4 ─ render */
   return (
