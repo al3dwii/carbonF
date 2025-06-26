@@ -1,11 +1,11 @@
 import Shell from "@/components/Shell";
 import { getServerRole } from "@/lib/getRole.server";
+import type { LayoutProps } from "@/types/layout";
 
 export default async function OrgLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
+}: LayoutProps & {
   params: Promise<{ orgId: string }>;
 }) {
   /* 1️⃣  capture the dynamic segment immediately */

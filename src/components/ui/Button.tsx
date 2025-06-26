@@ -1,8 +1,18 @@
 "use client";
-import { forwardRef, ButtonHTMLAttributes } from "react";
+import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-export const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(function Button(
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  asChild?: boolean;
+}
+
+export type ButtonVariant = "default" | "outline" | "ghost";
+export type ButtonSize = "sm" | "md" | "lg";
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { className, ...props }, ref
 ) {
   return (

@@ -10,7 +10,9 @@ const inter = Inter({ subsets:["latin"], variable:"--font-inter" });
 export const metadata = { title: "CarbonCore Console" };
 export const viewport = { width: 1024, initialScale: 1 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import type { LayoutProps } from "@/types/layout";
+
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <ClerkProvider>
       <html lang="en" className={inter.variable}>

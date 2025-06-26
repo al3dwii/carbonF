@@ -1,5 +1,5 @@
 "use client";
-import { Slider } from "@headlessui/react";
+import { Slider } from "@/components/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { apiFetch } from "@/lib/api/_fetch";

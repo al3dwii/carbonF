@@ -1,5 +1,5 @@
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui';
-import { ExclamationTriangleIcon } from 'lucide-react';
+import { AlertTriangle as ExclamationTriangleIcon } from 'lucide-react';
 
 export default function AlertBanner({ count }: { count: number }) {
   if (!count) return null;

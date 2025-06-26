@@ -25,12 +25,28 @@ async function load(): Promise<ReqFn> {
 }
 
 /** Call this everywhere – it forwards to the correct implementation. */
-export async function request<T = unknown>(
-  input: Parameters<ReqFn>[0],
-  init?: Parameters<ReqFn>[1],
-  fallback?: Parameters<ReqFn>[2],
+export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+export async function request<T = unknown, Q = {}, M extends Method = 'GET'>(
+  url: string,
+  params?: Q,
+  method?: M,
+  body?: any,
 ): Promise<T> {
   const real = await load();
+
+  if (params && Object.keys(params as any).length) {
+    const u = new URL(url, 'http://x');
+    Object.entries(params as any).forEach(([k, v]) =>
+      u.searchParams.set(k, String(v))
+    );
+    url = u.pathname + u.search;
+  }
+
+  const init: RequestInit = {};
+  if (method) init.method = method;
+  if (body) init.body = JSON.stringify(body);
+
   // eslint-disable-next-line @typescript-eslint/return-await
-  return real<T>(input, init);
+  return real<T>(url, init as Parameters<ReqFn>[1]);
 }
