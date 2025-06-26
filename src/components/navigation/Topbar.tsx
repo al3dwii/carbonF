@@ -11,7 +11,7 @@ export default function Topbar() {
 
   return (
     <header className="flex items-center justify-between bg-white p-4 shadow">
-      <OrgSwitcher currentId={orgId} />
+      <OrgSwitcher currentId={orgId!} />
       <div className="flex items-center gap-4">
         <Dialog>
           <DialogTrigger className="btn">Create…</DialogTrigger>

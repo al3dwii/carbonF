@@ -3,8 +3,8 @@ import { useChat } from "@/lib/useChat";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-export default function ChatWindow() {
-  const { messages = [], send } = useChat();
+export default function ChatWindow({ orgId }: { orgId: string }) {
+  const { messages = [], send } = useChat(orgId);
   return (
     <div className="flex h-full flex-col">
       <div className="grow space-y-3 overflow-y-auto p-4">

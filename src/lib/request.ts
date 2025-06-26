@@ -27,12 +27,16 @@ async function load(): Promise<ReqFn> {
 /** Call this everywhere – it forwards to the correct implementation. */
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-export async function request<T = unknown, Q = {}, M extends Method = 'GET'>(
+export async function request<
+  R = unknown,
+  Q = Record<string, unknown>,
+  M extends Method = Method
+>(
   url: string,
   params?: Q,
   method?: M,
-  body?: any,
-): Promise<T> {
+  body?: unknown,
+): Promise<R> {
   const real = await load();
 
   if (params && Object.keys(params as any).length) {
@@ -48,5 +52,5 @@ export async function request<T = unknown, Q = {}, M extends Method = 'GET'>(
   if (body) init.body = JSON.stringify(body);
 
   // eslint-disable-next-line @typescript-eslint/return-await
-  return real<T>(url, init as Parameters<ReqFn>[1]);
+  return real<R>(url, init as Parameters<ReqFn>[1]);
 }
