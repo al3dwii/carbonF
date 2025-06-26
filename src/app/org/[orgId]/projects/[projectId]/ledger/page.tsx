@@ -6,12 +6,12 @@ import { useApi } from "@/lib/hooks";
 
 export const revalidate = 10;
 
-export default async function ProjectLedger({
-  params,
-}: {
+export default async function ProjectLedger(
+  props: {
   params: { orgId: string; projectId: string };
-}) {
-  const { orgId, projectId } = params;
+  },
+) {
+  const { orgId, projectId } = props.params;
   /* server fetch for first paint */
   const initial = await request<any[]>(
     `/org/${orgId}/projects/${projectId}/ledger`,

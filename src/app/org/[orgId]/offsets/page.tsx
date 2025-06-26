@@ -7,8 +7,10 @@ import { Loading } from '@/components/Loading';
 
 export const revalidate = 60;
 
-export default function Page({ params }: { params: { orgId: string } }) {
-  const { orgId } = params;
+export default function Page(
+  props: { params: { orgId: string } },
+) {
+  const { orgId } = props.params;
   return (
     <Suspense fallback={<Loading />}>
       <Content orgId={orgId} />

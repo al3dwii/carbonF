@@ -2,8 +2,10 @@
 import { request } from "@/lib/client";
 import Link from "next/link";
 
-export default async function ProjectsPage({ params }: { params: { orgId: string } }) {
-  const { orgId } = params;
+export default async function ProjectsPage(
+  props: { params: { orgId: string } },
+) {
+  const { orgId } = props.params;
   const projects = await request(`/org/${orgId}/projects`, "get", { orgId });
   return (
     <div className="p-6">

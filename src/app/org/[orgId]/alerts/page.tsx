@@ -3,8 +3,10 @@ import AlertTable from "@/components/alerts/AlertTable"; // create if missing
 
 export const revalidate = 10;
 
-export default async function AlertsPage({ params }: { params: { orgId: string } }) {
-  const { orgId } = params;
+export default async function AlertsPage(
+  props: { params: { orgId: string } },
+) {
+  const { orgId } = props.params;
   const data = await request(`/org/${orgId}/alerts`);
   return (
     <div className="p-6">

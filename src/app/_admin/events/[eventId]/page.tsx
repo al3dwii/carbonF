@@ -7,7 +7,10 @@ import { toast } from 'sonner';
 const JsonViewer = dynamic(() => import('react-json-view'), { ssr: false });
 const DiffViewer = dynamic(() => import('react-json-view-diff'), { ssr: false });
 
-export default async function EventDetail({ params: { eventId } }: { params: { eventId: string } }) {
+export default async function EventDetail(
+  props: { params: { eventId: string } },
+) {
+  const { eventId } = props.params;
   const ev = await request(`/api/events/${eventId}`);
   if (!ev) notFound();
   const prev = (ev as any).prev ?? null;

@@ -13,12 +13,12 @@ import { fetchCurrentBudget } from "@/lib/budget-api";
 import { ChartSkeleton } from "@/components/ui/ChartSkeleton";
 
 
-export default async function DashboardPage({
-  params,
-}: {
-  params: { orgId: string };
-}) {
-  const { orgId } = params;
+export default async function DashboardPage(
+  props: {
+    params: { orgId: string };
+  },
+) {
+  const { orgId } = props.params;
   // Server-side fetches (block render until resolved)
   const [kpis, alertCount, initialBudget] = await Promise.all([
     fetchKpis(orgId),

@@ -1,14 +1,14 @@
 import Shell from "@/components/Shell";
 import { getServerRole } from "@/lib/getRole.server";
 
-export default async function OrgLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { orgId: string };
-}) {
+export default async function OrgLayout(
+  props: {
+    children: React.ReactNode;
+    params: { orgId: string };
+  },
+) {
   const role = await getServerRole();
+  const { children, params } = props;
   const { orgId } = params;
 
   return (
