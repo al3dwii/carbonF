@@ -4,7 +4,7 @@ import { useState } from "react";
 import TimeRangePicker, { Range } from "@/components/widgets/TimeRangePicker";
 import CarbonBadge from "@/components/widgets/CarbonBadge";
 import DownloadDropdown from "@/components/widgets/DownloadDropdown";
-import LedgerTable from "@/components/ledger/LedgerTable.client";
+import { LedgerTable  }from "@/components/ledger/LedgerTable.client";
 import FilterBar from "@/components/ledger/FilterBar";
 import BalanceTrendChart from "@/components/ledger/BalanceTrendChart";
 import LiveStreamToggle from "@/components/widgets/LiveStreamToggle";
