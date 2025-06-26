@@ -22,7 +22,8 @@ export async function request<T = unknown>(
   let cookieHeaders: Record<string, string> = {};
   if (typeof window === 'undefined') {
     const { headers } = await import('next/headers'); // ★ dynamic
-    cookieHeaders = Object.fromEntries(headers());
+    const h = await headers();
+    cookieHeaders = Object.fromEntries(h);
   }
 
   const res = await fetch(url, {
