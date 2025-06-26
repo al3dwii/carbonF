@@ -9,12 +9,13 @@ export default async function ProjectPlugins(
   const plugins = await request<
     { slug: string; title: string; enabled: boolean }[]
   >(`/org/${orgId}/projects/${projectId}/plugins`);
+  const list = Array.isArray(plugins) ? plugins : [];
 
   return (
     <div className="p-6 space-y-4">
       <h1 className="text-xl mb-4">Enabled plugins</h1>
       <ul className="space-y-2">
-        {plugins.map((p) => (
+        {list.map((p) => (
           <li key={p.slug} className="flex items-center gap-4">
             <span className="w-40">{p.title}</span>
             <form

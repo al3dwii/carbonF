@@ -1,5 +1,23 @@
 "use client";
-import { MapContainer, TileLayer, CircleMarker, Tooltip } from "react-leaflet";
+import dynamic from "next/dynamic";
+
+// Disable SSR for Leaflet components
+const MapContainer = dynamic(
+  () => import("react-leaflet").then((m) => m.MapContainer),
+  { ssr: false },
+);
+const TileLayer = dynamic(
+  () => import("react-leaflet").then((m) => m.TileLayer),
+  { ssr: false },
+);
+const CircleMarker = dynamic(
+  () => import("react-leaflet").then((m) => m.CircleMarker),
+  { ssr: false },
+);
+const Tooltip = dynamic(
+  () => import("react-leaflet").then((m) => m.Tooltip),
+  { ssr: false },
+);
 import { useNodes } from "@/lib/nodes-api";
 import { usePolicyWeight } from "@/lib/usePolicyWeight";
 import { useEffect, useState } from "react";

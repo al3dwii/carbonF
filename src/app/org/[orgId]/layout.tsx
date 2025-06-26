@@ -7,9 +7,9 @@ export default async function OrgLayout(
     params: { orgId: string };
   },
 ) {
-  const role = await getServerRole();
   const { children, params } = props;
-  const { orgId } = params;
+  const { orgId } = params; // read params synchronously
+  const role = await getServerRole();
 
   return (
     <>

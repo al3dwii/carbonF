@@ -7,11 +7,12 @@ export default async function ProjectsPage(
 ) {
   const { orgId } = props.params;
   const projects = await request(`/org/${orgId}/projects`, "get", { orgId });
+  const list = Array.isArray(projects) ? projects : [];
   return (
     <div className="p-6">
       <h1 className="text-2xl mb-4">Projects</h1>
       <ul className="space-y-2">
-        {projects.map((p:{id:string;name:string}) => (
+        {list.map((p:{id:string;name:string}) => (
           <li key={p.id}>
             <Link href={`/org/${orgId}/projects/${p.id}`} className="underline">
               {p.name}
