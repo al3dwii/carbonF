@@ -1,5 +1,7 @@
 import Link from "next/link";
-export default function RouterLayout({ children }) {
+import type { LayoutProps } from "@/types/layout";
+
+export default function RouterLayout({ children }: LayoutProps) {
   return (
     <div className="space-y-6">
       <nav className="tabs">
