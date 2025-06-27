@@ -1,12 +1,9 @@
-import { CARBONCORE_URL } from "@/lib/env";
+import { proxy } from "@/lib/proxy";
 
 export async function GET(
-  _req: Request,
-  { params }: { params: { orgId: string } }
+  req: Request,
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
-  const res = await fetch(`${CARBONCORE_URL}/org/${params.orgId}/snapshot`);
-  return new Response(await res.text(), {
-    status: res.status,
-    headers: { "Content-Type": "application/json" }
-  });
+  const { orgId } = await params;
+  return proxy(req, `/org/${orgId}/snapshot`);
 }
